@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>斐波那契</title>
+  <style>
+    html,
+    body,
+    .main {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: black;
+    }
+
+    .top,
+    .top div,
+    .bottom {
+      width: 100%;
+    }
+
+    .top > div {
+      padding: 50px 0;
+    }
+
+    .top div:nth-child(1) {      
+      background: white;
+    }
+
+    span {
+      font-size: 28px;
+    }
+
+    .top div:nth-child(1) span {
+      color: black;
+    }
+
+    .top div:nth-child(2) span,
+    .output span,
+    sup {
+      color: white;
+    }
+
+    .main,
+    .top,
+    .top div,
+    .input,
+    .res {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .input,
+    .output,
+    .res>div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .input input {
+      width: 90%;
+      max-width: 300px;
+      height: 35px;
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      padding-left: 5px;
+      margin-bottom: 30px;
+    }
+
+    .output td {
+      color: #fff;
+      padding: 2px 3px;
+    }
+
+    .output .jzgs {
+      border-left: 2px solid #fff;
+      border-right: 2px solid #fff;
+    }
+
+    .output .jzgs tr:first-child td:first-child,
+    .output .jzgs tr:first-child td:last-child {
+      border-top: 2px solid #fff;
+    }
+
+    .output .jzgs tr:last-child td:first-child,
+    .output .jzgs tr:last-child td:last-child {
+      border-bottom: 2px solid #fff;
+    }
+
+    .res div {
+      max-width: 300px;
+      word-wrap: break-word;
+      word-break: break-all;
+      margin: 0 5px;
+      padding: 20px;
+      min-width: 12px;
+      min-height: 12px;
+    }
+
+    #queryRes {
+      word-wrap: break-word;
+      word-break: break-all;
+      width: 100%;
+      text-align: center;
+      background: #fff;
+      margin: 0 auto;
+      padding: 20px 0;
+      font-size: 12px;
+    }
+
+    .res div:first-child div:first-child {
+      border-left: 2px solid #fff;
+      border-top: 2px solid #fff;
+    }
+
+    .res div:first-child div:last-child {
+      border-right: 2px solid #fff;
+      border-top: 2px solid #fff;
+    }
+
+    .res div:last-child div:first-child {
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+
+    .res div:last-child div:last-child {
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+
+    h4 {
+      margin: 4px;
+      color: #fff;
+      text-align: center;
+    }
+    #queryResn {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="top">
+      <div>
+        <span>矩阵公式</span>
+        <img src="./static/img/feibo.png" alt="矩阵公式" width="300px">
+      </div>
+      <div>
+        <span>通项公式</span>
+        <img src="./static/img/feiboTXGS.jpg" alt="通项公式" width="300px">
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="input">
+        <p style="padding: 2em;">请输入n的值,  n ∈ { n | N<sup>+</sup> ∩ [3, 50000] }, 并按下Enter</p>
+        <input type="number" min="3" max="50000" onchange="on()" placeholder="请输入正整数n的值，范围[3-50000]">
+      </div>
+      <div class="output">
+        <table class="jzgs" cellspacing="0" cellpadding="0">
+          <tr>
+            <td></td>
+            <td id="fn">f(n)</td>
+            <td class="fn1">f(n-1)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="fn1">f(n-1)</td>
+            <td id="fn2">f(n-2)</td>
+            <td></td>
+          </tr>
+        </table>
+        <span> = </span>
+        <table class="jzgs" cellspacing="0" cellpadding="0">
+          <tr>
+            <td></td>
+            <td>1</td>
+            <td>1</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>1</td>
+            <td>0</td>
+            <td></td>
+          </tr>
+        </table>
+        <div style="height:50px;padding-left:2px;">
+          <sup id="n1">n-1</sup>
+        </div>
+      </div>
+      <h2>计算结果</h2>
+      <h4>Length</h4>
+      <h4>=</h4>
+      <div class="res">
+          <div>
+            <div id="fnvlen"></div>
+            <div class="fn1vlen"></div>
+          </div>
+          <div>
+            <div class="fn1vlen"></div>
+            <div id="fn2vlen"></div>
+          </div>
+        </div>
+        <h4>Result</h4>
+        <h4>=</h4>
+        <div class="res">
+          <div>
+            <div id="fnv"></div>
+            <div class="fn1v"></div>
+          </div>
+          <div>
+            <div class="fn1v"></div>
+            <div id="fn2v"></div>
+          </div>
+        </div>
+        <h4 id="queryReslen"></h4>
+        <h4 id="queryResn"></h4>
+        <h4 id="queryReseq"></h4>
+        <div id="queryRes">这里是结果哦(●'◡'●)</div>
+    </div>
+  </div>
+  <script>
+    function on() {
+      var n = document.querySelector("input").value;
+      if (isNaN(n) || n < 3) return;
+      document.querySelector("#fn").textContent = "f(" + n + ")";
+      document.querySelectorAll(".fn1").forEach(function (e) {
+        e.textContent = "f(" + (n - 1) + ")";
+      });
+      document.querySelector("#fn2").textContent = "f(" + (n - 2) + ")";
+      document.querySelector("#n1").textContent = n - 1;
+      fetch("https://api.wangxuefeng.com.cn/fibo/?k=" + n).then(function (rs) {
+        return rs.json();
+      }).then(function (rs) {
+        if (rs.status) {
+          setValue('#fnvlen', '.fn1vlen', '#fn2vlen', rs.resdata.c.v.length, rs.resdata.l.v.length, rs.resdata.ll.v.length);
+          setValue('#fnv', '.fn1v', '#fn2v', rs.resdata.c.v, rs.resdata.l.v, rs.resdata.ll.v);
+          setRes('#queryRes', '#queryReslen', '#queryResn', '#queryReseq', n, rs.resdata.c.v);
+        } else {
+          setValue('#fnvlen', '.fn1vlen', '#fn2vlen', rs.msg.length, rs.msg.length, rs.msg.length);
+          setValue('#fnv', '.fn1v', '#fn2v', rs.msg, rs.msg, rs.msg);
+          setRes('#queryRes', '#queryReslen', '#queryResn', '#queryReseq', n, rs.msg);
+        }
+      });
+    }
+
+    function setValue(vs, lvs, llvs, v, lv, llv) {
+      document.querySelector(vs).textContent = v;
+      document.querySelector(vs).textContent = v;
+      document.querySelectorAll(lvs).forEach(function (e) {
+        e.textContent = lv;
+      });
+      document.querySelector(llvs).textContent = llv;
+    }
+
+    function setRes(s, slen, sn, seq, n, v) {
+      document.querySelector(slen).textContent = 'f(' + n + ').length = ' + v.length;
+      document.querySelector(sn).textContent = 'f(' + n + ')';
+      document.querySelector(seq).textContent = '=';
+      document.querySelector(s).textContent = v;
+    }
+  </script>
+</body>
+
+</html>
