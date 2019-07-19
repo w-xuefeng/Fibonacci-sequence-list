@@ -16,17 +16,21 @@
       background: black;
     }
 
+    .top {
+      min-height: 450px;
+    }
+
     .top,
     .top div,
     .bottom {
       width: 100%;
     }
 
-    .top > div {
+    .top>div {
       padding: 50px 0;
     }
 
-    .top div:nth-child(1) {      
+    .top div:nth-child(1) {
       background: white;
     }
 
@@ -140,6 +144,7 @@
       color: #fff;
       text-align: center;
     }
+
     #queryResn {
       margin-top: 10px;
     }
@@ -160,7 +165,7 @@
     </div>
     <div class="bottom">
       <div class="input">
-        <p style="padding: 2em;">请输入n的值,  n ∈ { n | N<sup>+</sup> ∩ [3, 50000] }, 并按下Enter</p>
+        <p style="padding: 2em;">请输入n的值, n ∈ { n | N<sup>+</sup> ∩ [3, 50000] }, 并按下Enter</p>
         <input type="number" min="3" max="50000" onchange="on()" placeholder="请输入正整数n的值，范围[3-50000]">
       </div>
       <div class="output">
@@ -201,31 +206,31 @@
       <h4>Length</h4>
       <h4>=</h4>
       <div class="res">
-          <div>
-            <div id="fnvlen"></div>
-            <div class="fn1vlen"></div>
-          </div>
-          <div>
-            <div class="fn1vlen"></div>
-            <div id="fn2vlen"></div>
-          </div>
+        <div>
+          <div id="fnvlen"></div>
+          <div class="fn1vlen"></div>
         </div>
-        <h4>Result</h4>
-        <h4>=</h4>
-        <div class="res">
-          <div>
-            <div id="fnv"></div>
-            <div class="fn1v"></div>
-          </div>
-          <div>
-            <div class="fn1v"></div>
-            <div id="fn2v"></div>
-          </div>
+        <div>
+          <div class="fn1vlen"></div>
+          <div id="fn2vlen"></div>
         </div>
-        <h4 id="queryReslen"></h4>
-        <h4 id="queryResn"></h4>
-        <h4 id="queryReseq"></h4>
-        <div id="queryRes">这里是结果哦(●'◡'●)</div>
+      </div>
+      <h4>Result</h4>
+      <h4>=</h4>
+      <div class="res">
+        <div>
+          <div id="fnv"></div>
+          <div class="fn1v"></div>
+        </div>
+        <div>
+          <div class="fn1v"></div>
+          <div id="fn2v"></div>
+        </div>
+      </div>
+      <h4 id="queryReslen"></h4>
+      <h4 id="queryResn"></h4>
+      <h4 id="queryReseq"></h4>
+      <div id="queryRes">这里是结果哦(●'◡'●)</div>
     </div>
   </div>
   <script>
